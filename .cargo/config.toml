@@ -1,0 +1,9 @@
+# Each integration test starts its own three-node cluster as three real OS
+# processes. Run eleven of those at once and the machine has thirty-odd
+# processes competing for cores, election timers start missing their deadlines,
+# and tests fail for reasons that have nothing to do with the code.
+#
+# Three at a time keeps the suite honest and still finishes in well under a
+# minute. Override with `cargo test -- --test-threads=N`.
+[env]
+RUST_TEST_THREADS = "3"
